@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var bb="<?php echo base_URL()?>prs/";
+	var bb="<?php echo base_URL()?>psb_daftar/";
 	function cekkec(id, tampil) {
 		var id;
 		var tampil; 
@@ -43,13 +43,12 @@
 
 
 <?php
-$id_prov=$_GET[prov];
-$id_kab=$_GET[kab];
-$id_kec=$_GET[kec];
+$id_prov=$this->input->get(prov); ;
+$id_kab=$this->input->get(kab); ;
+$id_kec=$this->input->get(kec); ;
 
 if ($id_prov != ""){
 ?>
-
 	<div class="form-group">
 		<label class="col-sm-2" style="width: 20%;">Kabupaten</label>
 		<div class="col-xs-3" style="width: 40%;">
@@ -61,10 +60,10 @@ if ($id_prov != ""){
 				}
 
 				?>
-						</select>
-					</div>
-				</div>
-				<div id="loadData2"></div>
+			</select>
+		</div>
+	</div>
+	<div id="loadData2"></div>
 <?php } else if (($id_prov == "") && ($id_kab != "")) { ?>
 	<div class="form-group">
 		<label class="col-sm-2" style="width: 20%;">Kecamatan</label>
@@ -77,13 +76,13 @@ if ($id_prov != ""){
 				}
 
 				?>
-						</select>
-					</div>
-				</div>
-				<div id="loadData3"></div>
+			/select>
+		</div>
+	</div>
+	<div id="loadData3"></div>
 <?php } else if (($id_prov == "") && ($id_kab == "") && ($id_kec != "")) { ?>
 	<div class="form-group">
-		<label class="col-sm-2" style="width: 20%;">Kelurahan</label>
+		<label class="col-sm-2" style="width: 20%;">Desa/Kel</label>
 		<div class="col-xs-3" style="width: 40%;">
 			<select class="form-control select2 " style="width: 40%;" name='kel'  required>
 				<option value=''>---Pilih---</option>
@@ -93,7 +92,7 @@ if ($id_prov != ""){
 				}
 
 				?>
-						</select>
-					</div>
-				</div>
+			</select>
+		</div>
+	</div>
 <?php } ?>

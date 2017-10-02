@@ -1,6 +1,29 @@
+<script type="text/javascript">
+	var bb="<?php echo base_URL()?>psb_daftar/";
+	function cekkab(id, tampil) {
+		var id;
+		var tampil; 
+
+		var key = $("#" + id).val();
+		var val = $("#" + id).attr("val");
+		var ajx = $.ajax
+				({
+					url: bb + "cekkab", 
+					data: "prov=" + key + "&id=" + id,
+					cache: false,
+					beforeSend: function (msg) {
+						$("#" + tampil).html("<i class='fa fa-cog fa-spin'></i><small><br>memuat data...</small>");
+					},
+					success: function (msg) {
+						$("#" + tampil).html(msg);
+					}
+				});
+	}
+</script>
+
 <fieldset>
   	<div class="container">
-    	<form action="<?php echo base_url('prs/simpan_daftar'); ?>" method="post" class="form-horizontal">  
+    	<form action="<?php echo base_url('psb_daftar/simpan_daftar'); ?>" method="post" class="form-horizontal">  
     		<div class="form-group">
     			<div class="form-group">
 					<label class="col-sm-2" style="width: 100%;">NISN</label>

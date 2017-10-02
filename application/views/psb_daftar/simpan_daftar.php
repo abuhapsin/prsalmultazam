@@ -23,21 +23,3 @@
 
   	</div>
 </fieldset>
-
-
-
-<ul class='list-group'>
-	  	<li class='list-group-item list-group-item-success'>RINCIAN PENDAFTARAN</li>
-	</ul>
-Kode Pendaftaran : 
-Nama Calon : 
-Email : 
-Nomor Hp : 
-Tingkat : 
-Tahun:
-
-RINCIAN PEMBAYARAN
-Pendaftaran : Rp. 
-Transfer Ke Bank sdf 123 A.n PRS AL MuLTAZAM
-
-Catatan. Setelah melakukan transfer, kami akan mengirimkan email konfirmasi pembayaran. Kemudian dapat login ke portal https. dengan menggunakan akun yang kami kirimkan bersamaan email konfirmasi.

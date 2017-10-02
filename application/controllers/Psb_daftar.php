@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Prs extends CI_Controller {
+class Psb_daftar extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->helper('url');
@@ -11,58 +11,58 @@ class Prs extends CI_Controller {
 	}
 
 	public function beranda(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['prs_info'] = $this->m_models->getwhere("*", "prs_info", "menu_info", "beranda", "no_urut", "asc");
-		$this->load->view('prs/beranda', $data);
+		$this->load->view('psb_daftar/beranda', $data);
 		$this->load->view('themes/footloader');
 	}
 
 	public function info_pendaftaran(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['prs_info'] = $this->m_models->getwhere("*", "prs_info", "menu_info", "info_pendaftaran", "no_urut", "asc");
-		$this->load->view('prs/info_pendaftaran', $data);
+		$this->load->view('psb_daftar/info_pendaftaran', $data);
 		$this->load->view('themes/footloader');
 	}
 
 	public function biaya_pendidikan(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['prs_info'] = $this->m_models->getwhere("*", "prs_info", "menu_info", "biaya_pendidikan", "no_urut", "asc");
-		$this->load->view('prs/biaya_pendidikan', $data);
+		$this->load->view('psb_daftar/biaya_pendidikan', $data);
 		$this->load->view('themes/footloader');
 	}
 
 	public function ketentuan_daftar_ulang(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['prs_info'] = $this->m_models->getwhere("*", "prs_info", "menu_info", "ketentuan_daftar_ulang", "no_urut", "asc");
-		$this->load->view('prs/ketentuan_daftar_ulang', $data);
+		$this->load->view('psb_daftar/ketentuan_daftar_ulang', $data);
 		$this->load->view('themes/footloader');
 	}
 	
 	public function contact_person(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['prs_info'] = $this->m_models->getwhere("*", "prs_info", "menu_info", "contact_person", "no_urut", "asc");
-		$this->load->view('prs/contact_person', $data);
+		$this->load->view('psb_daftar/contact_person', $data);
 		$this->load->view('themes/footloader');
 	}
 	
 	
 
 	public function daftar_online(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$data['provinsi'] = $this->m_models->getTabelOrder("*", "provinsi", "nama", "asc");
-		$this->load->view('prs/daftar_online',$data);
+		$this->load->view('psb_daftar/daftar_online',$data);
 
 		$this->load->view('themes/footloader');
 	}
 
 	public function simpan_daftar(){ 
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$nisn = $this->input->post('nisn');
 		$nama_lengkap = strtoupper(addslashes($this->input->post('nama_lengkap')));
@@ -104,12 +104,19 @@ class Prs extends CI_Controller {
 		$hariini=date("Y-m-d");
 		$jam=date("H:i:s");
 
-		$htmlContent = '<h1>Tes kirim email</h1>';
-		    
+
+		//kirim email
+  		$htmlContent="<h4>Rincian Pendaftaran Ananda <b>".strtoupper($nama_lengkap)."</b></h2><br>
+			  		<h3>Silahkan transfer biaya pendaftaran <br>
+			  		<b>Rp. $dpsb->biaya_daftar</b></h4><br><br>
+			  		<h5>Ke rekening<b> $data[biaya_daftar][0]->nama_bank</b><br>
+  					<b>$b_daftar->no_rekening</b><br>
+			  		Atas Nama
+			  		<b>$data[biaya_daftar][0]->atas_nama</b></h5>";
 		$config['mailtype'] = 'html';
 		$this->email->initialize($config);
-		$this->email->to('ghinacitro@gmail.com');
-		$this->email->from('tes@gmail.com','ghina');
+		$this->email->to($email);
+		$this->email->from('tes@gmail.com','AL MULTAZAM');
 		$this->email->subject('Test Email (HTML)');
 		$this->email->message($htmlContent);
 		$this->email->send();
@@ -121,12 +128,12 @@ class Prs extends CI_Controller {
 				$data['daftar'] = $this->m_models->save_data($siswa, "daftar_psb");
 				//redirect('prs/simpan_daftar');
 				$data['daftar_psb'] = $this->m_models->getwhere("*", "daftar_psb", "biaya_daftar", $nominal_biaya, "nama_lengkap", "asc");
-				$this->load->view('prs/simpan_daftar',$data);
+				$this->load->view('psb_daftar/simpan_daftar',$data);
 			} 
 		} else {
 			echo "<script type = 'text/javascript'>BootstrapDialog.alert('Afwan NISN sudah ada!!!'); </script>";
 			$data['daftar_psb'] = $this->m_models->getwhere("*", "daftar_psb", "biaya_daftar", $nominal_biaya, "nama_lengkap", "asc");
-			$this->load->view('prs/daftar_online',$data);
+			$this->load->view('psb_daftar/daftar_online',$data);
 		}
 		$this->load->view('themes/footloader');
 	}
@@ -139,21 +146,21 @@ class Prs extends CI_Controller {
 		$data['kabupaten'] = $this->m_models->getwhere("*", "kabupaten", "id_prov", $id_prov, "nama", "asc");
 		$data['kecamatan'] = $this->m_models->getwhere("*", "kecamatan", "id_kab", $id_kab, "nama", "asc");
 		$data['kelurahan'] = $this->m_models->getwhere("*", "kelurahan", "id_kec", $id_kec, "nama", "asc");
-		$this->load->view('prs/cekkab',$data);
+		$this->load->view('psb_daftar/cekkab',$data);
 	}
 
 
 
 	
 	public function cek_pendaftaran(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$nisn=$this->input->post(nisn);
 		if ($nisn != ""){
 			$data['daftar_psb'] = $this->m_models->getwhereGroup("*", "daftar_psb", "nisn", $nisn, "nisn", "nama_lengkap", "asc");
-			$this->load->view('prs/cek_pendaftaran',$data);
+			$this->load->view('psb_daftar/cek_pendaftaran',$data);
 		} else {
-			$this->load->view('prs/cek_pendaftaran');
+			$this->load->view('psb_daftar/cek_pendaftaran');
 		}
 		
 		$this->load->view('themes/footloader');
@@ -161,7 +168,7 @@ class Prs extends CI_Controller {
 
 	
 	public function konf_bayar(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
 		$nisn=$this->input->post(nisn);
 		$tgl_bayar=$this->input->post(tgl_bayar);
@@ -171,26 +178,32 @@ class Prs extends CI_Controller {
 		if ($nisn != ""){
 			$pemb=array('nisn' => $nisn, 'tgl_bayar' => $tgl_bayar, 'nominal' => $nominal, 'metode_pemb' => $metode_pemb, 'keterangan' => $ket, 'status' => 'Proses');
 			$data['konf_pemb'] = $this->m_models->save_data($pemb, "konf_pembayaran");
-			redirect('prs/konf_bayar');
+			redirect('psb_daftar/konf_bayar');
 			echo "<h5><b>Silahkan tunggu 1x24jam untuk konfirmasi pembayaran agar dapat login</b></h5>";
 		} else {
-			$this->load->view('prs/konf_bayar');
+			$this->load->view('psb_daftar/konf_bayar');
 		}
 		
 		$this->load->view('themes/footloader');
 	}
 
+	function cekbayar(){
+		$data['biaya_daftar'] = $this->m_models->getwhere("*", "biaya_daftar", "status", "on", "nominal", "asc");
+		$this->load->view('psb_daftar/cekbayar',$data);
+	}
+	
+
 	public function konfirmasi_bayar(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
-		$this->load->view('prs/konfirmasi_bayar');
+		$this->load->view('psb_daftar/konfirmasi_bayar');
 		$this->load->view('themes/footloader');
 	}
 
 	public function login_calon_psb(){
-		$this->load->view('prs/prs');
+		$this->load->view('psb_daftar/psb_daftar');
 		$this->load->view('themes/header');
-		$this->load->view('prs/login_calon_psb');
+		$this->load->view('psb_daftar/login_calon_psb');
 		$this->load->view('themes/footloader');
 	}
 
@@ -205,7 +218,7 @@ class Prs extends CI_Controller {
 			$psw = $this->input->post('password');
 			$u = $usr;
 			$p = $psw;
-			$cek = $this->m_models->cekLoginCalonPSB($u, $p);  echo "$cek";
+			$cek = $this->m_models->cekLoginCalonPSB($u, $p); 
 			if ($cek->num_rows() > 0) {
 			//login berhasil, buat session
 				foreach ($cek->result() as $qad) {
@@ -216,21 +229,16 @@ class Prs extends CI_Controller {
 					$this->session->set_userdata($sess_data);
 				}
 				$this->session->set_flashdata('success', 'Login Berhasil !');
-				redirect(base_url('prs/c_santri'));
+				redirect(base_url('pendaftar/pendaftar'));
 			} else {
 				$this->session->set_flashdata('result_login', '<br>Username atau Password yang anda masukkan salah.');
-				redirect(base_url('prs/login_calon_psb'));
+				redirect(base_url('pendaftar/login_calon_psb'));
 			}
 		}
 	}
 	
 
-	public function c_santri(){
-		$this->load->view('prs/menu_csantri');
-		$this->load->view('themes/header');
-		$this->load->view('prs/login_calon_psb');
-		$this->load->view('themes/footloader');
-	}
+	
 	
 }
 ?>

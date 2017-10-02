@@ -1,6 +1,6 @@
 <fieldset>
   	<div class="container">
-    	<form action="<?php echo base_url('prs/proses_login'); ?>" method="post" class="form-horizontal">  
+    	<form action="<?php echo base_url('psb_daftar/proses_login'); ?>" method="post" class="form-horizontal">  
     		<div class="form-group">
     			<div class="form-group">
 					<label class="col-sm-2" style="width: 100%;">USERNAME</label>
